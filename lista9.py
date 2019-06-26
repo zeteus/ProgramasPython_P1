@@ -67,9 +67,52 @@ def insere_ordenado(elem, lista):
 
 '''
     H) 
-'''
+
 def ordena_lista(lista, inte):
     if inte == len(lista):
         return lista
     else:
         return ordena_lista(insere_ordenado(lista[0], lista[1:]), inte + 1)
+'''
+
+
+'''
+    I) Retire os elementos repetidos de uma lista
+'''
+def retira_repetidos(lista):
+    if lista == []:
+        return []
+    if lista[0] in lista[1:]:
+        return retira_repetidos(lista[1:])
+    else:
+        return [lista[0]] + retira_repetidos(lista[1:])
+
+
+'''
+    J) Calcule as ocorrencias de um elemento 'K' na lista
+'''
+def ocorrencias(k, lista):
+    if lista == []:
+        return 0
+    elif lista[0] == k:
+        return 1 + ocorrencias(k, lista[1:])
+    else:
+        return ocorrencias(k, lista[1:])
+
+
+'''
+    K) Para cada elemento na lista informe a quantidade de ocorrencias na lista
+'''
+def ocorrenciasLista(lista):
+    def auxiliarOcorrencias(listaSemRepetidos, lista):
+        if len(listaSemRepetidos) == 1:
+            return [(listaSemRepetidos[0], ocorrencias(listaSemRepetidos[0], lista))]
+        else:
+            return [(listaSemRepetidos[0], ocorrencias(listaSemRepetidos[0], lista))] + auxiliarOcorrencias(listaSemRepetidos[1:], lista)
+
+    return auxiliarOcorrencias(retira_repetidos(lista), lista)
+
+
+'''
+    L) 
+'''
