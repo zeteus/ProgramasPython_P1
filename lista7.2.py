@@ -274,3 +274,84 @@ def mostraSigno():
 # QUESTAO 8)
 
 ## verificar se uma lista qualquer esta ordenada
+def esta_ordenado(lista):
+    if type(lista[0]) == list:
+        return esta_ordenado(lista[0])
+    elif len(lista) == 2:
+        if type(lista[1]) == list:
+            return esta_ordenado(lista[1])
+        elif lista[0] < lista[1]:
+            return True
+        else:
+            return False
+    elif type(lista[1]) == list:
+        if lista[0] > lista[2]:
+            return False
+        else:
+            return esta_ordenado(lista[1:])
+    elif lista[0] > lista[1] and type(lista[1]) != list:
+        return False
+    else:
+        return esta_ordenado(lista[1:])
+
+
+# QUESTAO 9)
+
+## retorna a posicao da primeira ocorrencia de um numero dado
+def primeira_ocorrencia(lista, num):
+    def somaPosicao(l, n):
+        if n == l[0]:
+            return 0
+        else:
+            return 1 + somaPosicao(l[1:], n)
+    if lista == []:
+        return -2
+    elif num in lista:
+        return somaPosicao(lista, num)
+    else:
+        return -1
+
+
+# QUESTAO 10)
+
+## Funcao auxiliar para as questoes
+def retira_repetidos(lista):
+        if len(lista) == 0:
+            return []
+        elif lista[0] in lista[1:]:
+            return retira_repetidos(lista[1:])
+        else:
+            return [lista[0]] + retira_repetidos(lista[1:])
+
+
+# A) receba duas lista e faca a uniao entre elas
+def uniao(lista1, lista2):
+    return retira_repetidos(lista1 + lista2)
+
+
+# B) receba duas lista e faca a intercecao entre elas
+def intercecao(lista1, lista2):
+    def gera_intercecao(lista1, lista2):
+        if lista1 == []:
+            return []
+        elif lista1[0] in lista2:
+            return [lista1[0]] + intercecao(lista1[1:], lista2)
+        else:
+            return intercecao(lista1[1:], lista2)
+    return retira_repetidos(gera_intercecao(lista1, lista2))
+
+
+# C) intercala os numeros das listas
+def intercala(lista1, lista2):
+    if lista1 == []:
+        if lista2 == []:
+            return []
+        else:
+            return lista2
+    elif lista2 == []:
+        if lista1 == []:
+            return []
+        else:
+            return lista1
+    else:
+        return [lista1[0]] + [lista2[0]] + intercala(lista1[1:], lista2[1:])

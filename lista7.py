@@ -45,7 +45,7 @@ def primeiroLista(lista):
 
 # funcao principal que calcula as ocorrencias
 def ocorrencias(lista):
-    primeiro = primeiroLista(lista);
+    primeiro = primeiroLista(lista)
     listaOcorre = [x for x in lista if x == primeiro]
     return len(listaOcorre)
 
